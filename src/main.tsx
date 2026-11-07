@@ -1,0 +1,13 @@
+import { createRoot, hydrateRoot } from "react-dom/client";
+import App from "./App";
+import "./styles/tokens.css";
+import "./styles/globals.css";
+import "./styles/premium.css";
+import "./styles/scroll-scenes.css";
+import "./styles/brand-signature.css";
+import "./styles/interactive.css";
+import "./styles/finishing.css";
+const root = document.getElementById("root")!;
+const app = <App privacy={location.pathname.startsWith("/privacidade")} />;
+if (root.querySelector("main")) hydrateRoot(root, app);
+else createRoot(root).render(app);

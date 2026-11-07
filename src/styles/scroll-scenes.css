@@ -1,0 +1,179 @@
+/* Cenas reversíveis: o progresso da animação acompanha a rolagem. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal,
+    .hero-copy > *,
+    .hero-image {
+      animation: scene-scroll linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    .hero-image,
+    .reveal[class*="visual"] {
+      animation-name: photo-scroll;
+    }
+    .reveal:focus-within,
+    .hero-copy > *:focus-within {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+@keyframes scene-scroll {
+  0%,
+  3% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  18%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98%,
+  100% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+}
+@keyframes photo-scroll {
+  0%,
+  3% {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  20%,
+  82% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98%,
+  100% {
+    opacity: 0;
+    transform: translateY(-26px);
+  }
+}
+@media (max-width: 800px) {
+  @keyframes scene-scroll {
+    0%,
+    2% {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    14%,
+    83% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    99%,
+    100% {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+  }
+  @keyframes photo-scroll {
+    0%,
+    2% {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    16%,
+    85% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    99%,
+    100% {
+      opacity: 0;
+      transform: translateY(-18px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-copy > *,
+  .hero-image {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* Fotos saem de cena antes de desaparecerem completamente da viewport. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-image,
+    .reveal[class*="visual"] {
+      animation-name: photo-scroll-visible;
+    }
+    .method-journey {
+      view-timeline-name: --method-photo;
+      view-timeline-axis: block;
+    }
+    .journey-stage > .portrait {
+      animation: method-photo-exit linear both;
+      animation-timeline: --method-photo;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+}
+@keyframes photo-scroll-visible {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  23%,
+  58% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+@keyframes method-photo-exit {
+  0%,
+  88% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+@media (max-width: 800px) {
+  @keyframes photo-scroll-visible {
+    0%,
+    3% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    20%,
+    59% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    95%,
+    100% {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-stage > .portrait {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* Clip recorta o grafismo sem criar um contêiner de rolagem interno. */
+@supports (overflow: clip) {
+  .hero {
+    overflow: clip;
+  }
+}

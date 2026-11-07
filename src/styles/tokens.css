@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Archivo;
+  src: url("/images/Archivo-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/images/Archivo-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/images/Archivo-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-display: swap;
+}
+:root {
+  --navy: #003359;
+  --night: #01182a;
+  --blue: #02456d;
+  --blue-label: #076893;
+  --cream: #fff8f0;
+  --sand: #ecd7bc;
+  --sand-light: #e7ceae;
+  --gold: #d8b587;
+  --font: Archivo, Arial, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --content: 1248px;
+  --reveal-duration: 0.8s;
+}

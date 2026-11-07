@@ -1,0 +1,175 @@
+/* Interação inspirada na referência Uiverse.io de Smit-Prajapati. */
+.brand-signature {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 460px;
+  height: 200px;
+  margin: 0 0 36px;
+  padding: 0;
+  border: 1px solid #d8b58730;
+  border-radius: 0;
+  background: var(--night);
+  color: var(--gold);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color 0.35s,
+    transform 0.35s var(--ease);
+  text-align: center;
+  touch-action: manipulation;
+}
+.signature-frame {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  transform: rotate(7deg) scale(0.96);
+  transition:
+    opacity 0.45s,
+    transform 0.65s var(--ease);
+  pointer-events: none;
+}
+.signature-window {
+  display: block;
+  width: 260px;
+  height: 62px;
+  clip-path: inset(0 198px 0 0);
+  transform: translateX(99px);
+  transition:
+    clip-path 0.85s var(--ease),
+    transform 0.85s var(--ease);
+  pointer-events: none;
+}
+.signature-window img {
+  display: block;
+  width: 260px;
+  height: auto;
+  max-width: none;
+}
+.signature-values {
+  position: absolute;
+  top: 130px;
+  left: 22px;
+  right: 22px;
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(7px);
+  transition:
+    opacity 0.4s 0.15s,
+    transform 0.55s 0.15s var(--ease);
+  pointer-events: none;
+}
+.signature-instruction {
+  position: absolute;
+  bottom: 13px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  background: var(--night);
+  pointer-events: none;
+  transition: letter-spacing 0.5s;
+}
+.signature-hint-open {
+  display: none;
+}
+.signature-toggle {
+  font-size: 17px;
+  line-height: 1;
+}
+.brand-signature.is-open {
+  border-color: #d8b58770;
+}
+.brand-signature.is-open .signature-frame,
+.brand-signature:focus-visible .signature-frame {
+  opacity: 1;
+  transform: none;
+}
+.brand-signature.is-open .signature-window,
+.brand-signature:focus-visible .signature-window {
+  clip-path: inset(0);
+  transform: translateX(0);
+}
+.brand-signature.is-open .signature-values,
+.brand-signature:focus-visible .signature-values {
+  opacity: 1;
+  transform: none;
+}
+.brand-signature.is-open .signature-hint-default {
+  display: none;
+}
+.brand-signature.is-open .signature-hint-open {
+  display: inline;
+}
+.brand-signature:active {
+  transform: scale(0.99);
+}
+@media (hover: hover) and (pointer: fine) {
+  .brand-signature:hover {
+    border-color: #d8b58770;
+    transform: translateY(-3px);
+  }
+  .brand-signature:hover .signature-frame {
+    opacity: 1;
+    transform: none;
+  }
+  .brand-signature:hover .signature-window {
+    clip-path: inset(0);
+    transform: none;
+  }
+  .brand-signature:hover .signature-values {
+    opacity: 1;
+    transform: none;
+  }
+  .brand-signature:hover .signature-hint-default {
+    display: none;
+  }
+  .brand-signature:hover .signature-hint-open {
+    display: inline;
+  }
+}
+@media (max-width: 374px) {
+  .signature-window {
+    width: 224px;
+    height: 53px;
+    clip-path: inset(0 171px 0 0);
+    transform: translateX(85.5px);
+  }
+  .signature-window img {
+    width: 224px;
+  }
+  .signature-values {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .signature-instruction {
+    font-size: 8px;
+    left: 20px;
+    right: 20px;
+  }
+  .signature-frame {
+    inset: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-signature,
+  .brand-signature * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .brand-signature:hover,
+  .brand-signature:active {
+    transform: none;
+  }
+}
