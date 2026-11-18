@@ -139,3 +139,56 @@
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* Aviso de cookies (só com medição de anúncios configurada). Usa os tokens da marca. */
+.consent-banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 90;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1.2rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem;
+  background: var(--cream);
+  color: var(--navy);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 12px 36px #0003;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.consent-banner p {
+  margin: 0;
+  flex: 1 1 320px;
+}
+.consent-banner a {
+  color: var(--navy);
+  text-decoration: underline;
+}
+.consent-banner div {
+  display: flex;
+  gap: 0.5rem;
+}
+.consent-banner button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background: var(--navy);
+  color: #fff;
+  padding: 0.55rem 1rem;
+}
+.consent-banner .consent-secondary {
+  background: transparent;
+  color: var(--navy);
+}
+.consent-banner :focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+}

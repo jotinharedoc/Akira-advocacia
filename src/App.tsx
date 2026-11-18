@@ -10,14 +10,24 @@ import {
   Footer,
 } from "./components/Sections";
 import { Privacy } from "./components/Privacy";
-export default function App({ privacy = false }: { privacy?: boolean }) {
+import { ConsentBanner } from "./components/ConsentBanner";
+import { NotFound } from "./components/NotFound";
+export default function App({
+  privacy = false,
+  notFound = false,
+}: {
+  privacy?: boolean;
+  notFound?: boolean;
+}) {
   return (
     <>
       <a className="skip" href="#conteudo">
         Pular para o conteúdo
       </a>
       <Header />
-      {privacy ? (
+      {notFound ? (
+        <NotFound />
+      ) : privacy ? (
         <Privacy />
       ) : (
         <main id="conteudo">
@@ -31,6 +41,7 @@ export default function App({ privacy = false }: { privacy?: boolean }) {
         </main>
       )}
       <Footer />
+      <ConsentBanner />
     </>
   );
 }

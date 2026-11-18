@@ -8,6 +8,12 @@ import "./styles/brand-signature.css";
 import "./styles/interactive.css";
 import "./styles/finishing.css";
 const root = document.getElementById("root")!;
-const app = <App privacy={location.pathname.startsWith("/privacidade")} />;
+// A 404 vem marcada no HTML pré-renderizado (data-page), pois o endereço pode ser qualquer um.
+const app = (
+  <App
+    privacy={location.pathname.startsWith("/privacidade")}
+    notFound={root.dataset.page === "404"}
+  />
+);
 if (root.querySelector("main")) hydrateRoot(root, app);
 else createRoot(root).render(app);

@@ -31,6 +31,14 @@ export function Privacy() {
               para responder ao contato e para a prestação de serviços
               jurídicos, sob sigilo profissional.
             </p>
+            <h2>Cookies de medição</h2>
+            <p>
+              Quando o site usa medição de anúncios (Google Ads e Google
+              Analytics), ela só é ativada se você clicar em “Aceitar” no aviso
+              de cookies. A medição registra visitas e cliques para falar com o
+              escritório; nenhuma informação sobre o seu caso é coletada. Você
+              pode recusar sem prejuízo ao atendimento.
+            </p>
             <h2>Hospedagem</h2>
             <p>
               O site é hospedado na Vercel. A infraestrutura de hospedagem pode

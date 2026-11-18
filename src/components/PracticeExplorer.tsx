@@ -100,7 +100,7 @@ export function PracticeExplorer() {
           </div>
           <div className="explorer-panels">
             {c.items.map((area, i) => (
-              <article
+              <div
                 key={area.title}
                 className="practice-panel"
                 id={`area-panel-${i}`}
@@ -122,7 +122,7 @@ export function PracticeExplorer() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </div>
             ))}
           </div>
         </div>
