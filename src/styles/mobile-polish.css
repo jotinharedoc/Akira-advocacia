@@ -39,7 +39,6 @@
   .visual-caption,
   .family-checklist legend,
   .journey-caption-index > span,
-  .journey-controls > button,
   .story-step .eyebrow,
   .roots .eyebrow,
   .signature > span,
@@ -64,7 +63,6 @@
   .checklist-hint,
   .checklist-end,
   .checklist-end p,
-  .journey-hint,
   .footer-brand p {
     font-size: 13px;
     line-height: 1.5;
@@ -84,23 +82,6 @@
   }
   .hero-actions .text-link {
     min-height: 44px;
-  }
-
-  /* Método: etapas 01–04 em linha inteira, abaixo da foto, com botões largos */
-  .journey-controls {
-    grid-column: 1 / -1;
-    grid-row: 4;
-    gap: 8px;
-    margin-top: 18px;
-  }
-  .journey-controls > button {
-    min-width: 44px;
-    min-height: 48px;
-  }
-  .journey-hint {
-    grid-column: 1 / -1;
-    grid-row: 5;
-    margin-top: 8px;
   }
 
   /* 3. Botão de menu mais discreto (sem caixa, mesmo alvo de toque) */
@@ -127,25 +108,11 @@
   body:has(.menu[aria-expanded="true"]) {
     overflow: hidden;
   }
-  body:has(.menu[aria-expanded="true"]) .mobile-contact {
-    transform: translateY(110%);
-    pointer-events: none;
-  }
 
-  /* 5. Barra fixa do WhatsApp mais leve e só quando não há outro botão de contato na tela */
-  .mobile-contact {
-    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
-    background: #01182af2;
-    transition: transform 0.3s var(--ease);
-  }
-  .mobile-contact.is-hidden {
-    transform: translateY(110%);
-    pointer-events: none;
-  }
-  .mobile-contact a {
-    min-height: 48px;
-    padding: 0 16px;
-    font-size: 14px;
+  /* 5. Sem barra fixa do WhatsApp: os botões do topo, da família e do contato já levam ao WhatsApp.
+     O espaço que o rodapé reservava para a barra também sai. */
+  .footer {
+    padding-bottom: 40px;
   }
 
   /* 6. Assinatura da marca fora do caminho do contato no celular */
@@ -162,11 +129,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center 15%;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mobile-contact {
-    transition: none;
   }
 }
 
@@ -188,14 +150,3 @@
   }
 }
 
-/* Etapas do método fora de foco: continuam mais apagadas, mas legíveis (contraste ≥ 4,5:1) */
-.method-journey[data-enhanced="true"] .story-step {
-  opacity: 0.7;
-}
-.method-journey[data-enhanced="true"] .story-step:not(.is-active) .eyebrow {
-  color: var(--navy);
-}
-.method-journey[data-enhanced="true"] .story-step.is-active,
-.method-journey[data-enhanced="true"] .story-step:focus-within {
-  opacity: 1;
-}
