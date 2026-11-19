@@ -1,0 +1,201 @@
+/* Ajustes de uso no celular (revisão de 19/11/2026).
+   Texto mínimo de 12px, alvos de toque de 44px, barra do WhatsApp mais leve,
+   menu em tela cheia e lista de documentos com caixas visíveis. */
+
+/* Lista "O que ajuda ter em mãos": caixa de seleção visível em todos os tamanhos */
+.check-row > .check-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--gold);
+  font-size: 13px;
+  line-height: 1;
+}
+.check-row.checked > .check-number {
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 16px;
+}
+.check-row input:focus-visible + .check-number {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  /* 1. Texto mínimo de 12px (etiquetas) e 13px (notas) */
+  .eyebrow,
+  .hero .eyebrow,
+  .hero-copy > .eyebrow,
+  .hero-meta,
+  .photo-caption,
+  .band-label,
+  .chapter-number,
+  .explorer-instruction,
+  .explorer-category,
+  .panel-heading .eyebrow,
+  .visual-caption,
+  .family-checklist legend,
+  .journey-caption-index > span,
+  .journey-controls > button,
+  .story-step .eyebrow,
+  .roots .eyebrow,
+  .signature > span,
+  .faq-number,
+  .contact-channels > .eyebrow,
+  .channel > span,
+  .footer-grid .eyebrow,
+  .footer-grid a,
+  .footer-bottom,
+  .footer-bottom p,
+  .footer-bottom a,
+  .footer-bottom span,
+  .section-kicker .eyebrow,
+  .family .visual-caption,
+  .office .visual-caption,
+  .office .visual-caption > span,
+  .channel > span:first-child,
+  .footer-grid > div:not(:first-child) > a {
+    font-size: 12px;
+  }
+  .explorer-note,
+  .checklist-hint,
+  .checklist-end,
+  .checklist-end p,
+  .journey-hint,
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* 2. Alvos de toque de 44px */
+  .footer-grid a,
+  .footer-grid > div:not(:first-child) > a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .footer-bottom a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .hero-actions .text-link {
+    min-height: 44px;
+  }
+
+  /* Método: etapas 01–04 em linha inteira, abaixo da foto, com botões largos */
+  .journey-controls {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .journey-controls > button {
+    min-width: 44px;
+    min-height: 48px;
+  }
+  .journey-hint {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: 8px;
+  }
+
+  /* 3. Botão de menu mais discreto (sem caixa, mesmo alvo de toque) */
+  .menu {
+    border-color: transparent;
+    gap: 12px;
+    padding: 10px 4px 10px 12px;
+    min-width: 44px;
+    font-size: 13px;
+  }
+
+  /* 4. Menu em tela cheia; a barra do WhatsApp some enquanto ele está aberto */
+  .nav {
+    height: calc(100dvh - 80px);
+    max-height: none;
+    border-bottom: 0;
+    font-size: 17px;
+  }
+  .nav > a {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+  }
+  body:has(.menu[aria-expanded="true"]) {
+    overflow: hidden;
+  }
+  body:has(.menu[aria-expanded="true"]) .mobile-contact {
+    transform: translateY(110%);
+    pointer-events: none;
+  }
+
+  /* 5. Barra fixa do WhatsApp mais leve e só quando não há outro botão de contato na tela */
+  .mobile-contact {
+    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+    background: #01182af2;
+    transition: transform 0.3s var(--ease);
+  }
+  .mobile-contact.is-hidden {
+    transform: translateY(110%);
+    pointer-events: none;
+  }
+  .mobile-contact a {
+    min-height: 48px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  /* 6. Assinatura da marca fora do caminho do contato no celular */
+  .contact-channels .brand-signature {
+    display: none;
+  }
+
+  /* 7. Foto do Dr. Akira mais compacta no topo, para aparecer mais cedo */
+  .hero-image .portrait {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  .hero-image .portrait img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-contact {
+    transition: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .header .brand {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+@media (max-width: 800px) {
+  /* Etiqueta do topo em uma linha só com 12px */
+  .hero-copy > .eyebrow {
+    letter-spacing: 0.05em;
+  }
+  /* Itens do menu maiores para ler e tocar */
+  .nav.open > a:not(.nav-contact) {
+    font-size: 18px;
+  }
+}
+
+/* Etapas do método fora de foco: continuam mais apagadas, mas legíveis (contraste ≥ 4,5:1) */
+.method-journey[data-enhanced="true"] .story-step {
+  opacity: 0.7;
+}
+.method-journey[data-enhanced="true"] .story-step:not(.is-active) .eyebrow {
+  color: var(--navy);
+}
+.method-journey[data-enhanced="true"] .story-step.is-active,
+.method-journey[data-enhanced="true"] .story-step:focus-within {
+  opacity: 1;
+}

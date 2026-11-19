@@ -108,7 +108,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Falar com o escritório <span aria-hidden="true">↗</span>
+            Conversar pelo WhatsApp <span aria-hidden="true">↗</span>
           </a>
         </nav>
         <button

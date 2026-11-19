@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { site, content, navigation } from "../config/site";
 import { Reveal } from "./Reveal";
 import { BrandSignature } from "./BrandSignature";
@@ -27,7 +27,7 @@ export function Hero() {
           </h1>
           <p className="hero-description">{c.description}</p>
           <div className="hero-actions">
-            <Button href={site.whatsapp}>Falar com o escritório</Button>
+            <Button href={site.whatsapp}>Conversar pelo WhatsApp</Button>
             <a className="text-link" href="#familia">
               Tenho um familiar preso <span aria-hidden="true">↓</span>
             </a>
@@ -124,7 +124,7 @@ export function Family() {
               event.currentTarget.href = buildFamilyWhatsappLink(checked);
             }}
           >
-            Falar com o escritório
+            Conversar pelo WhatsApp
           </Button>
         </Reveal>
       </div>
@@ -228,7 +228,6 @@ export function Contact() {
           <Button href={site.whatsapp}>Conversar pelo WhatsApp</Button>
         </Reveal>
         <Reveal className="contact-channels">
-          <BrandSignature />
           <p className="eyebrow">Canais diretos do escritório</p>
           <a
             href={site.whatsapp}
@@ -257,12 +256,38 @@ export function Contact() {
           <p className="contact-note">
             Prisão em flagrante? Informe essa situação já no primeiro contato.
           </p>
+          <BrandSignature />
         </Reveal>
       </div>
     </section>
   );
 }
+// Barra fixa do WhatsApp no celular: some enquanto outro botão de contato já está na tela
+// (topo da página, seção de contato e rodapé) e quando o menu está aberto (via CSS).
+function useStickyContactHidden() {
+  const [hidden, setHidden] = useState(true);
+  useEffect(() => {
+    // Sem IntersectionObserver (navegadores muito antigos) a barra fica escondida;
+    // os botões do topo e da seção de contato continuam disponíveis.
+    if (!("IntersectionObserver" in window)) return;
+    const targets = [
+      ...document.querySelectorAll(".hero-actions, #contato .button, .footer"),
+    ];
+    if (!targets.length) return;
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries)
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      setHidden(visible.size > 0);
+    });
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
+  return hidden;
+}
 export function Footer() {
+  const stickyHidden = useStickyContactHidden();
   return (
     <>
       <footer className="footer">
@@ -314,8 +339,16 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      <div className="mobile-contact">
-        <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+      <div
+        className={`mobile-contact ${stickyHidden ? "is-hidden" : ""}`}
+        aria-hidden={stickyHidden}
+      >
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={stickyHidden ? -1 : undefined}
+        >
           Conversar pelo WhatsApp <span aria-hidden="true">↗</span>
         </a>
       </div>
