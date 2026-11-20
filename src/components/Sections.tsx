@@ -238,9 +238,9 @@ export function AboutOffice() {
       <div className="wrap office-grid">
         <figure className="office-photo">
           <Photo
-            name="advogado"
+            name="hero"
             sizes="(max-width: 860px) 100vw, 40vw"
-            alt="Akira Kobayashi de terno azul, com os braços apoiados, olhando para a câmera"
+            alt="Akira Kobayashi de terno marinho, com as mãos apoiadas no encosto de um sofá de couro"
           />
         </figure>
         <div className="office-copy">

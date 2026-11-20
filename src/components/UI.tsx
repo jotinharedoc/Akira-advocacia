@@ -6,7 +6,6 @@ const photoRatio: Record<string, number> = {
   metodo: 2160,
   escritorio: 2160,
   retrato: 2160,
-  advogado: 2160,
 };
 
 export function Photo({
