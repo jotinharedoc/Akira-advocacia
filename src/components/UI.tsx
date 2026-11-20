@@ -1,135 +1,95 @@
-import {
-  useEffect,
-  useRef,
-  type ReactNode,
-  type MouseEventHandler,
-} from "react";
-function revealHeroImage(image: HTMLImageElement) {
-  if (
-    !image.naturalWidth ||
-    image.dataset.introPlayed ||
-    typeof image.animate !== "function" ||
-    matchMedia("(prefers-reduced-motion: reduce)").matches
-  )
-    return;
-  image.dataset.introPlayed = "true";
-  const desktop = matchMedia("(min-width: 801px) and (pointer: fine)").matches;
-  image.animate(
-    [
-      {
-        opacity: desktop ? 0.9 : 0.96,
-        transform: `translateY(${desktop ? 7 : 4}px) scale(1.008)`,
-        ...(desktop ? { filter: "blur(1px)" } : {}),
-      },
-      {
-        opacity: 1,
-        transform: "none",
-        ...(desktop ? { filter: "blur(0px)" } : {}),
-      },
-    ],
-    { duration: desktop ? 420 : 280, easing: "cubic-bezier(.22,1,.36,1)" },
-  );
-}
+import type { ReactNode, MouseEventHandler } from "react";
+
+const photoRatio: Record<string, number> = {
+  hero: 2160,
+  familia: 960,
+  metodo: 2160,
+  escritorio: 2160,
+  retrato: 2160,
+  advogado: 2160,
+};
+
 export function Photo({
   name,
   alt,
   className = "",
+  sizes = "(max-width: 860px) 100vw, 45vw",
+  eager = false,
 }: {
   name: string;
   alt: string;
   className?: string;
+  sizes?: string;
+  eager?: boolean;
 }) {
-  const image = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    if (name === "hero" && image.current?.complete)
-      revealHeroImage(image.current);
-  }, [name]);
   return (
-    <figure className={`portrait ${className}`}>
-      <img
-        ref={image}
-        onLoad={
-          name === "hero"
-            ? (event) => revealHeroImage(event.currentTarget)
-            : undefined
-        }
-        src={`/photos/${name}-1440.webp`}
-        srcSet={`/photos/${name}-720.webp 720w, /photos/${name}-1440.webp 1440w`}
-        sizes="(max-width: 800px) calc(100vw - 48px), 45vw"
-        width={1440}
-        height={name === "familia" ? 960 : 2160}
-        alt={alt}
-        loading={name === "hero" ? "eager" : "lazy"}
-        fetchPriority={name === "hero" ? "high" : "auto"}
-        decoding="async"
+    <img
+      className={className}
+      src={`/photos/${name}-1440.webp`}
+      srcSet={`/photos/${name}-720.webp 720w, /photos/${name}-1440.webp 1440w`}
+      sizes={sizes}
+      width={1440}
+      height={photoRatio[name] ?? 2160}
+      alt={alt}
+      loading={eager ? "eager" : "lazy"}
+      fetchPriority={eager ? "high" : "auto"}
+      decoding="async"
+    />
+  );
+}
+
+/** Ícone do WhatsApp em traço, no mesmo peso dos demais ícones. */
+export function WhatsappIcon() {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M4.5 19.5l1.1-3.9A8 8 0 1 1 8.6 18.4z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
       />
-    </figure>
+      <path
+        d="M9.2 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.4c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.1.4-.2.6-.1l1.4.6c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.6.3-1.6.4-3-.3a8.3 8.3 0 0 1-3.6-3.6c-.6-1.3-.6-2.4-.2-2.9z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
-export function Arrow() {
+
+export function ArrowIcon({ direction = "up-right" }: { direction?: "up-right" | "down" }) {
   return (
-    <span aria-hidden="true" className="arrow">
-      ↗
-    </span>
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      {direction === "down" ? (
+        <path d="M12 5v14m0 0l-5-5m5 5l5-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      ) : (
+        <path d="M7 17L17 7m0 0H9m8 0v8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      )}
+    </svg>
   );
 }
+
 export function Button({
   children,
   href,
-  light = false,
+  variant = "gold",
   onClick,
 }: {
   children: ReactNode;
   href: string;
-  light?: boolean;
+  variant?: "gold" | "outline" | "ink";
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
+  const external = href.startsWith("https:");
   return (
     <a
-      className={`button ${light ? "button-light" : ""}`}
+      className={`button button-${variant}`}
       href={href}
       onClick={onClick}
-      {...(href.startsWith("https:")
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : {})}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
+      {href.includes("wa.me") && <WhatsappIcon />}
       <span>{children}</span>
-      <Arrow />
     </a>
-  );
-}
-const chapters: Record<string, string> = {
-  "Áreas de atuação": "01",
-  "Para a família": "02",
-  "Como trabalhamos": "03",
-  "O escritório": "04",
-  "Dúvidas frequentes": "05",
-  "Vamos conversar": "06",
-};
-export function SectionTitle({
-  label,
-  title,
-  accent,
-  id,
-}: {
-  label: string;
-  title: string;
-  accent: string;
-  id?: string;
-}) {
-  return (
-    <>
-      <div className="section-kicker">
-        {chapters[label] && (
-          <span className="chapter-number" aria-hidden="true">
-            {chapters[label]}
-          </span>
-        )}
-        <p className="eyebrow">{label}</p>
-      </div>
-      <h2 id={id}>
-        {title} <strong>{accent}</strong>
-      </h2>
-    </>
   );
 }

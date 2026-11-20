@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#003359" />
+    <meta name="theme-color" content="#01182a" />
     <title>
       Advogado criminalista e execução penal em SP | Akira Kobayashi
     </title>
@@ -41,14 +41,14 @@
     <link
       rel="preload"
       as="image"
-      href="/photos/hero-720.webp"
-      imagesrcset="/photos/hero-720.webp 720w, /photos/hero-1440.webp 1440w"
-      imagesizes="(max-width: 800px) calc(100vw - 48px), 45vw"
+      href="/photos/retrato-720.webp"
+      imagesrcset="/photos/retrato-720.webp 720w, /photos/retrato-1440.webp 1440w"
+      imagesizes="(max-width: 860px) 100vw, 52vw"
       fetchpriority="high"
     />
     <link
       rel="preload"
-      href="/images/Archivo-Black.woff2"
+      href="/fonts/Literata-opsz.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -62,39 +62,25 @@
     />
     <noscript
       ><style>
-        .explorer-navigation {
-          display: none !important;
-        }
-        .explorer-panels {
-          display: block !important;
-          min-height: 0 !important;
-        }
-        .practice-panel[hidden] {
-          display: block !important;
-          visibility: visible !important;
-          pointer-events: auto !important;
-        }
-        .practice-panel {
-          margin-bottom: 40px;
-        }
-        .brand-signature {
-          display: none !important;
-        }
         .menu {
           display: none !important;
         }
-        @media (max-width: 800px) {
+        @media (max-width: 960px) {
           .nav {
-            display: flex !important;
             position: static !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: none !important;
             flex-direction: row !important;
             flex-wrap: wrap !important;
             padding: 0 !important;
-            border: 0 !important;
-            font-size: 12px !important;
+            background: none !important;
           }
-          .nav > a {
-            padding: 10px !important;
+          .nav a {
+            min-height: 44px !important;
+            font-size: 0.9375rem !important;
+            border: 0 !important;
+            padding: 0 10px 0 0 !important;
           }
           .nav .nav-contact {
             display: none !important;
@@ -102,11 +88,7 @@
           .header-inner {
             height: auto !important;
             flex-wrap: wrap !important;
-            padding-block: 20px !important;
-            gap: 20px !important;
-          }
-          .header {
-            position: relative !important;
+            padding-block: 16px !important;
           }
         }
       </style></noscript

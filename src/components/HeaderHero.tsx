@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { navigation, site } from "../config/site";
+import { WhatsappIcon } from "./UI";
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const nav = useRef<HTMLElement>(null);
   const ref = useRef<HTMLElement>(null);
+
+  // Marca no menu a seção que está na tela.
   useEffect(() => {
     if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(
@@ -20,14 +24,17 @@ export function Header() {
             });
         }
       },
-      { rootMargin: "-100px 0px -55% 0px", threshold: 0 },
+      { rootMargin: "-90px 0px -55% 0px", threshold: 0 },
     );
     document
       .querySelectorAll("main>section[id]")
       .forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
+  // Menu do celular: Esc fecha e devolve o foco, toque fora fecha, a página não rola por trás.
   useEffect(() => {
+    document.documentElement.classList.toggle("menu-open", open);
     if (!open) return;
     nav.current?.querySelector<HTMLAnchorElement>("a")?.focus();
     const close = (e: KeyboardEvent) => {
@@ -46,22 +53,20 @@ export function Header() {
       document.removeEventListener("pointerdown", outside);
     };
   }, [open]);
+
+  // Cabeçalho compacto e com fundo depois que o topo sai da tela.
   useEffect(() => {
-    const progress = document.querySelector<HTMLElement>(".reading-progress");
     let frame = 0;
     let compact = false;
     const update = () => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        const next = scrollY > 140;
-        if (next !== compact) {
+        const next = scrollY > 24;
+        if (next !== compact && ref.current) {
           compact = next;
-          if (ref.current) ref.current.dataset.compact = String(next);
+          ref.current.dataset.compact = String(next);
         }
-        const max = document.documentElement.scrollHeight - innerHeight;
-        if (progress)
-          progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
       });
     };
     addEventListener("scroll", update, { passive: true });
@@ -71,34 +76,26 @@ export function Header() {
       cancelAnimationFrame(frame);
     };
   }, []);
+
   return (
-    <header className="header" ref={ref}>
-      <div className="reading-progress" aria-hidden="true" />
+    <header className="header" ref={ref} data-open={open}>
       <div className="wrap header-inner">
-        <a
-          href="/#inicio"
-          className="brand"
-          aria-label="Akira Kobayashi, início"
-        >
+        <a href="/#inicio" className="brand" aria-label="Akira Kobayashi, início">
           <img
             src="/brand/logo-horizontal-creme.svg"
             alt="Akira Kobayashi Advogados"
-            width="188"
-            height="44"
+            width="176"
+            height="41"
           />
         </a>
         <nav
           id="navegacao"
-          className={`nav ${open ? "open" : ""}`}
+          className="nav"
           ref={nav}
           aria-label="Navegação principal"
         >
           {navigation.map((link) => (
-            <a
-              key={link.href}
-              href={`/${link.href}`}
-              onClick={() => setOpen(false)}
-            >
+            <a key={link.href} href={`/${link.href}`} onClick={() => setOpen(false)}>
               {link.label}
             </a>
           ))}
@@ -108,7 +105,8 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Conversar pelo WhatsApp <span aria-hidden="true">↗</span>
+            <WhatsappIcon />
+            Conversar pelo WhatsApp
           </a>
         </nav>
         <button
@@ -119,8 +117,8 @@ export function Header() {
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
-          {open ? "Fechar" : "Menu"}
-          <span aria-hidden="true">{open ? "−" : "+"}</span>
+          <span className="menu-label">{open ? "Fechar" : "Menu"}</span>
+          <span className="menu-lines" aria-hidden="true" />
         </button>
       </div>
     </header>

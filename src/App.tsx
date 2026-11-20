@@ -3,7 +3,6 @@ import {
   Hero,
   PracticeAreas,
   Family,
-  Method,
   AboutOffice,
   FAQ,
   Contact,
@@ -33,9 +32,8 @@ export default function App({
         <main id="conteudo">
           <Hero />
           <PracticeAreas />
-          <Family />
-          <Method />
           <AboutOffice />
+          <Family />
           <FAQ />
           <Contact />
         </main>

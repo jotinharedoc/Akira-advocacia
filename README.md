@@ -1,6 +1,6 @@
 # Akira Kobayashi — landing page
 
-Código da versão publicada em https://akira-kobayashi.vercel.app, atualizada em 06/11/2026.
+Versão de teste do redesign (19/11/2026), feita a partir da branch claude/mobile-polish. Não publicada: nada foi enviado à Vercel nem ao GitHub.
 
 React 19, TypeScript, Vite e CSS nativo. Layout responsivo, quatro fotografias reais, navegação compacta ao rolar, áreas de atuação em painéis, método em capítulos, fotos com animações reversíveis, assinatura interativa e FAQ acessível. Respeita a preferência de movimento reduzido.
 

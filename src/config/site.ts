@@ -10,9 +10,8 @@ export const site = {
 };
 export const navigation = [
   { href: "#atuacao", label: "Atuação" },
+  { href: "#escritorio", label: "O advogado" },
   { href: "#familia", label: "Para a família" },
-  { href: "#como", label: "Nosso método" },
-  { href: "#escritorio", label: "O escritório" },
   { href: "#duvidas", label: "Dúvidas" },
 ];
 export const content = {
@@ -56,6 +55,78 @@ export const content = {
           "Saída temporária, trabalho externo e prisão domiciliar",
           "Defesa em falta disciplinar (sindicância)",
           "Transferência de unidade prisional",
+        ],
+      },
+    ],
+  },
+  // Linha do caso: as mesmas atividades das duas áreas, organizadas pela fase em que o caso está.
+  journey: {
+    title: "Em que fase está o caso?",
+    description:
+      "Escolha o momento mais próximo da situação. Mostramos o que o escritório faz nessa fase e você já começa a conversa a partir dela.",
+    phases: [
+      {
+        id: "inquerito",
+        area: "Direito Penal",
+        name: "Investigação",
+        title: "Inquérito e delegacia",
+        when: "Houve intimação para depor, busca e apreensão ou existe uma investigação aberta.",
+        does: [
+          "Acompanhamento em delegacia e no inquérito policial",
+          "Estudo do que já consta na investigação",
+          "Restituição de bens apreendidos",
+        ],
+      },
+      {
+        id: "flagrante",
+        area: "Direito Penal",
+        name: "Prisão em flagrante",
+        title: "Prisão em flagrante",
+        when: "Alguém acabou de ser preso e ainda vai passar pela audiência de custódia.",
+        does: [
+          "Audiência de custódia",
+          "Pedidos de liberdade",
+          "Habeas corpus",
+        ],
+        note: "Informe a prisão logo no primeiro contato.",
+      },
+      {
+        id: "processo",
+        area: "Direito Penal",
+        name: "Processo",
+        title: "Processo criminal",
+        when: "A denúncia foi recebida e o caso segue na Justiça, com audiências e prazos.",
+        does: [
+          "Resposta à acusação",
+          "Audiências e alegações finais",
+          "Tribunal do Júri",
+        ],
+      },
+      {
+        id: "recursos",
+        area: "Direito Penal",
+        name: "Recursos",
+        title: "Recursos e revisão",
+        when: "Já existe sentença e é preciso levar a decisão aos tribunais.",
+        does: [
+          "Recursos aos tribunais",
+          "Habeas corpus",
+          "Revisão criminal",
+        ],
+      },
+      {
+        id: "execucao",
+        area: "Execução Penal",
+        name: "Cumprimento da pena",
+        title: "Execução penal",
+        when: "Houve condenação e a pena está sendo cumprida, em qualquer regime.",
+        does: [
+          "Conferência do cálculo de pena",
+          "Progressão de regime e livramento condicional",
+          "Remição por trabalho, estudo e leitura",
+          "Indulto e comutação de pena",
+          "Saída temporária, trabalho externo e prisão domiciliar",
+          "Defesa em falta disciplinar e transferência de unidade",
         ],
       },
     ],
