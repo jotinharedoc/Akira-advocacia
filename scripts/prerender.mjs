@@ -38,7 +38,7 @@ try {
         url: origin + "/",
         image: origin + "/photos/og.jpg",
         logo: origin + "/brand/logo-horizontal-marinho.svg",
-        telephone: "+55 14 99788-4001",
+        telephone: "+55 11 95658-4001",
         description: content.hero.description,
         address: {
           "@type": "PostalAddress",

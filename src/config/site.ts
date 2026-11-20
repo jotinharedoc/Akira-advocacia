@@ -4,8 +4,8 @@ export const site = {
   society: "OAB/SP 41.050",
   url: "https://akira-kobayashi.vercel.app",
   whatsapp:
-    "https://wa.me/5514997884001?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20caso.",
-  phone: "(14) 99788-4001",
+    "https://wa.me/5511956584001?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20caso.",
+  phone: "(11) 95658-4001",
   instagram: "https://www.instagram.com/adv_akira/",
 };
 export const navigation = [
